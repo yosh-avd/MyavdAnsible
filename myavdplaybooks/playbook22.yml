@@ -1,0 +1,13 @@
+---
+- name: check if file f1 present if not create dir with same name f1
+  hosts: all
+  tasks:
+   - name: check if f1 present
+     stat:
+       path: /tmp/f1
+     register: a
+   - name: Display output of above module
+     debug:
+      var: a    
+...
+

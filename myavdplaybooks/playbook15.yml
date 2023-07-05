@@ -1,0 +1,22 @@
+---
+- name: Implementing tags
+  hosts: all
+  gather_facts: false
+  become: yes
+  tasks:
+    - name: Install GIT
+      apt:
+        name: git
+        state: present
+        update_cache: yes
+      tags: git_installation
+    - name: Create user
+      user:
+        name: Rakesh
+        password: rakesh123
+      tags: user_creation
+    - name: Copy passwd files
+      copy:
+        src: /etc/passwd
+        dest: /tmp
+...

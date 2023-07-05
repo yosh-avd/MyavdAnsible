@@ -1,0 +1,42 @@
+---
+- name:  Install apache2 and httpd based on OS type
+  hosts: all
+  tasks:
+    - name: Install s/w apache on ubuntu using apt
+      apt :
+        name: apache2
+        state: present
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+    - name: Install s/w httpd on RHEL using yum
+      yum:
+        name: httpd
+        state: present
+        update_cache: yes
+      when: ansible_distribution == "RedHat"
+    - name: edit index.html
+      copy:
+        content: "proud to be an Indian"
+        dest: /var/www/html/index.html
+    - name: Restart apache2 on Ubuntu
+      service:
+        name: apache2
+        state: restarted
+      when: ansible_distribution == "Ubuntu"     
+    - name: Restart httpd on RHEL
+      service:
+        name: httpd
+        state: restarted
+      when: ansible_distribution == "RedHat"
+    - name: check the URL response
+      uri:
+        url: "{{item}}"
+        status_code: 200
+      with_items:
+         - http://172.31.88.196
+         - http://172.31.86.40
+         - http://172.31.15.104
+         - http://172.31.8.185
+         - http://172.31.20.237
+...
+

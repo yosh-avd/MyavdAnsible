@@ -1,0 +1,12 @@
+---
+- name: To work on multiple child modules
+  hosts: all
+  tasks:
+    - name: configure
+      include: "{{item}}"
+      with_items:
+        - install.yml
+        - edit.yml
+        - restart.yml
+        - uriresponse.yml
+...

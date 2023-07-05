@@ -1,0 +1,26 @@
+---
+- name: Creating apache2
+  hosts: all
+  tasks:
+    - name: Installing apache2 on node1 and node2
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+    - name: Edit the index.html
+      copy:
+        content: "Welcome to Myworld"
+        dest: /var/www/html/index.html
+    - name: Restart apache2
+      service:
+        name: apache2
+        state: restarted
+    - name: Check the URL response of apache2 on node1
+      uri:
+        url: http://3.86.198.134
+        status_code: 200
+    - name: Check the URL response of apache2 on node2
+      uri:
+        url: http://3.94.210.166
+        status_code: 200
+...

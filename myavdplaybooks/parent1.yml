@@ -1,0 +1,14 @@
+---
+- name: Install tomcat using child playbooks
+  hosts: servers
+  tasks:
+   - name: call multiple child playbooks
+     include_tasks: "{{item}}"
+     with_items:
+       - install_tomcat.yml
+       - copytomcat.yml
+       - portchange.yml
+       - restart_tomcat9.yml
+       - pause.yml
+       - check_urlresponse.yml  
+...

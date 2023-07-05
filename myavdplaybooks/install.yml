@@ -1,0 +1,6 @@
+---
+- name: install apache2 on all machine
+  apt: 
+    name: apache2
+    state: present
+...

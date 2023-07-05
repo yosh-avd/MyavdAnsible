@@ -1,0 +1,7 @@
+---
+- name: edit the index.html file
+  copy:
+    content: "welcome to my techworld"
+    dest: /var/www/html/index.html
+
+...

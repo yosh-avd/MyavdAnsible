@@ -1,0 +1,13 @@
+---
+- name: install packages
+  hosts: all
+  tasks:
+    - name: Install s/w
+      apt:
+        name: "{{item}}"
+        state: absent
+      with_items:
+           - tomcat9
+           - git
+           - maven
+...

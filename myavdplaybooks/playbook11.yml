@@ -1,0 +1,40 @@
+---
+- name: install Tomcat9
+  hosts: all
+  tasks:
+    - name: Installing Tomcat9 on managed hosts
+      apt:
+        name: tomcat9
+        state: present
+        update_cache: yes
+    - name: install tomcat9-admin
+      apt:
+        name: tomcat9-admin
+        state: present
+    - name: copy tomcat-users file
+      copy:
+        src: /home/ubuntu/tomcat-users.xml
+        dest: /etc/tomcat9/tomcat-users.xml
+    - name: change the default port to 6060
+      replace:
+        regexp: 8080
+        replace: 6060
+        path: /etc/tomcat9/server.xml
+    - name: restart tomcat
+      service:
+        name: tomcat9
+        state: restarted
+    - name: pause playbook
+      pause:
+        minutes: 1
+    - name: Check the URL response 
+      uri:
+        url: "{{item}}"
+        status_code: 200
+      with_items:
+        - http://172.31.88.196:6060
+        - http://172.31.86.40:6060
+        - http://172.31.15.104:6060
+        - http://172.31.8.185:6060  
+...
+

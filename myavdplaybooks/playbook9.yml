@@ -1,0 +1,39 @@
+---
+- name: Install packages
+  hosts: all 
+  tasks:
+    - name: Install git
+      apt:
+        name: git
+        state: present
+        update_cache: yes
+    - name: Install maven
+      apt:
+        name: maven
+        state: present
+    - name: Install tree
+      apt: 
+        name: tree
+        state: present
+...
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+-- INSERT --                                                                           10,5          All
+      
+...
